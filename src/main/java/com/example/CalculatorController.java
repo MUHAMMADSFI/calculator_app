@@ -2,30 +2,22 @@ package com.example;
 
 import org.springframework.web.bind.annotation.*;
 
+
+
 @RestController
-@RequestMapping("/api/calculator")
+@CrossOrigin("*")
 public class CalculatorController {
 
-    @GetMapping("/add")
-    public double add(@RequestParam double a, @RequestParam double b) {
-        return a + b;
-    }
-
-    @GetMapping("/subtract")
-    public double subtract(@RequestParam double a, @RequestParam double b) {
-        return a - b;
-    }
-
-    @GetMapping("/multiply")
-    public double multiply(@RequestParam double a, @RequestParam double b) {
-        return a * b;
-    }
-
-    @GetMapping("/divide")
-    public double divide(@RequestParam double a, @RequestParam double b) {
-        if (b == 0) {
-            throw new ArithmeticException("Division by zero is not allowed.");
-        }
-        return a / b;
+    @GetMapping("/calculate")
+    public double calculate(@RequestParam double num1,
+                            @RequestParam double num2,
+                            @RequestParam String op) {
+        return switch (op) {
+            case "+" -> num1 + num2;
+            case "-" -> num1 - num2;
+            case "*" -> num1 * num2;
+            case "/" -> num2 != 0 ? num1 / num2 : 0;
+            default -> 0;
+        };
     }
 }
