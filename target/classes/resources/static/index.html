@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculator</title>
+  <style>
+    body { font-family: sans-serif; margin: 20px; }
+    input, select { margin: 5px; padding: 8px; }
+  </style>
+</head>
+<body>
+  <h1>Java Web Calculator</h1>
+  <input type="number" id="num1" placeholder="First number" />
+  <select id="op">
+    <option>+</option><option>-</option><option>*</option><option>/</option>
+  </select>
+  <input type="number" id="num2" placeholder="Second number" />
+  <button onclick="calculate()">Calculate</button>
+  <h2 id="result"></h2>
+
+  <script>
+    function calculate() {
+      const n1 = document.getElementById("num1").value;
+      const n2 = document.getElementById("num2").value;
+      const op = document.getElementById("op").value;
+      fetch(`http://localhost:8080/calculate?num1=${n1}&num2=${n2}&op=${op}`)
+        .then(res => res.text())
+        .then(result => document.getElementById("result").innerText = "Result: " + result);
+    }
+  </script>
+</body>
+</html>
