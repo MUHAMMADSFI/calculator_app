@@ -13,10 +13,11 @@ public class CalculatorController {
                             @RequestParam double num2,
                             @RequestParam String op) {
         return switch (op) {
-            case "+" -> num1 + num2;
+            
             case "-" -> num1 - num2;
             case "*" -> num1 * num2;
             case "/" -> num2 != 0 ? num1 / num2 : 0;
+            case "+" -> num1 + num2;
             default -> 0;
         };
     }
